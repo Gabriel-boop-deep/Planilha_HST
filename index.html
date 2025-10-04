@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilha de Custos do Acidente - ENG295</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin: 20px;
+        }
+        
+        .info-box h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .info-item {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .info-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .tables-container {
+            padding: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        caption {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background: #f8f9fa;
+            color: #2c3e50;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        
+        td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        .subtotal-row {
+            background: #f1f3f5;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .total-row {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .total-row td {
+            padding: 15px;
+        }
+        
+        .valor {
+            color: #2c3e50;
+        }
+        
+        .resumo {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 30px;
+            margin: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .resumo h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .resumo .valor-final {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .resumo .comparacao {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+        
+        .observacao {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+        
+        .observacao strong {
+            color: #856404;
+        }
+        
+        .btn-container {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .btn-container {
+                display: none;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ANÁLISE DE CUSTOS DO ACIDENTE DE TRABALHO</h1>
+            <p>ENG295 - Higiene e Segurança do Trabalho</p>
+            <p>Gabriel Nunes Barbosa Nogueira - 219120116</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>📋 Dados do Acidente</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Cargo:</strong>
+                    Técnico Eletricista de Manutenção
+                </div>
+                <div class="info-item">
+                    <strong>Regime:</strong>
+                    CLT - 44h semanais
+                </div>
+                <div class="info-item">
+                    <strong>Salário Mensal:</strong>
+                    R$ 4.200,00
+                </div>
+                <div class="info-item">
+                    <strong>Data do Acidente:</strong>
+                    15/04/2025
+                </div>
+                <div class="info-item">
+                    <strong>Tempo de Afastamento:</strong>
+                    60 dias
+                </div>
+                <div class="info-item">
+                    <strong>Data de Retorno:</strong>
+                    14/06/2025
+                </div>
+            </div>
+        </div>
+        
+        <div class="tables-container">
+            <table>
+                <caption>💰 CUSTOS DIRETOS</caption>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Cálculo</th>
+                        <th>Valor (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Salário (primeiros 15 dias)</td>
+                        <td>R$ 140,00/dia × 15 dias</td>
+                        <td class="valor">2.100,00</td>
+                    </tr>
+                    <tr>
+                        <td>Encargos Sociais (35%)</td>
+                        <td>35% × R$ 2.100,00</td>
+                        <td class="valor">735,00</td>
+                    </tr>
+                    <tr>
+                        <td>Transporte (Ambulância)</td>
+                        <td>Custo fixo</td>
+                        <td class="valor">850,00</td>
+                    </tr>
+                    <tr>
+                        <td>Internação Hospitalar (5 dias)</td>
+                        <td>R$ 2.500,00/dia × 5 dias</td>
+                        <td class="valor">12.500,00</td>
+                    </tr>
+                    <tr>
+                        <td>Medicamentos e Curativos</td>
+                        <td>Custo fixo</td>
+                        <td class="valor">1.200,00</td>
+                    </tr>
+                    <tr>
+                        <td>Fisioterapia (12 sessões)</td>
+                        <td>R$ 200,00 × 12 sessões</td>
+                        <td class="valor">2.400,00</td>
+                    </tr>
+                    <tr class="subtotal-row">
+                        <td colspan="2">SUBTOTAL - CUSTOS DIRETOS</td>
+                        <td>19.785,00</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <table>
+                <caption>📊 CUSTOS INDIRETOS</caption>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Cálculo</th>
+                        <th>Valor (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Contratação Temporária (60 dias)</td>
+                        <td>R$ 300,00/dia × 60 dias</td>
+                        <td class="valor">18.000,00</td>
+                    </tr>
+                    <tr>
+                        <td>Horas Extras (Equipe)</td>
+                        <td>3 técnicos × 40h × R$ 40,00/h</td>
+                        <td class="valor">4.800,00</td>
+                    </tr>
+                    <tr>
+                        <td>Treinamento NR-10 (15 eletricistas)</td>
+                        <td>15 técnicos × R$ 233,33</td>
+                        <td class="valor">3.500,00</td>
+                    </tr>
+                    <tr>
+                        <td>Aquisição de Novos EPIs</td>
+                        <td>Custo fixo</td>
+                        <td class="valor">2.800,00</td>
+                    </tr>
+                    <tr>
+                        <td>Consultoria em Segurança</td>
+                        <td>Custo fixo</td>
+                        <td class="valor">1.500,00</td>
+                    </tr>
+                    <tr>
+                        <td>Investigação do Acidente</td>
+                        <td>Horas SESMT/CIPA/Engenheiros</td>
+                        <td class="valor">2.200,00</td>
+                    </tr>
+                    <tr>
+                        <td>Procedimentos Administrativos (CAT)</td>
+                        <td>Custo fixo</td>
+                        <td class="valor">500,00</td>
+                    </tr>
+                    <tr class="subtotal-row">
+                        <td colspan="2">SUBTOTAL - CUSTOS INDIRETOS</td>
+                        <td>33.300,00</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <table>
+                <caption>📈 RESUMO GERAL</caption>
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th></th>
+                        <th>Valor (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Custos Diretos</td>
+                        <td></td>
+                        <td class="valor">19.785,00</td>
+                    </tr>
+                    <tr>
+                        <td>Custos Indiretos</td>
+                        <td></td>
+                        <td class="valor">33.300,00</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="2">CUSTO TOTAL DO ACIDENTE</td>
+                        <td>R$ 52.585,00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="resumo">
+            <h2>💡 IMPACTO FINANCEIRO</h2>
+            <div class="valor-final">R$ 52.585,00</div>
+            <div class="comparacao">
+                ⚠️ O custo total representa <strong>12,5 vezes</strong> o salário mensal do trabalhador (R$ 4.200,00)
+            </div>
+        </div>
+        
+        <div class="observacao">
+            <strong>📌 Observação Importante:</strong> Este cálculo demonstra o alto impacto financeiro dos acidentes de trabalho para as organizações, além dos danos humanos e sociais incalculáveis. A prevenção é sempre o melhor investimento.
+        </div>
+        
+        <div class="observacao" style="background: #d1ecf1; border-left-color: #0c5460;">
+            <strong>⚖️ Base Legal:</strong> Conforme Lei 8.213/1991, Art. 60, o empregador paga os primeiros 15 dias de afastamento. Do 16º dia em diante, o INSS assume com auxílio-doença acidentário. Atividade regulada pelas NR-10 (Segurança em Eletricidade) e NR-6 (EPIs).
+        </div>
+        
+        <div class="btn-container">
+            <button class="btn" onclick="window.print()">🖨️ Imprimir Planilha</button>
+            <button class="btn" onclick="downloadCSV()">📥 Baixar CSV</button>
+        </div>
+    </div>
+    
+    <script>
+        function downloadCSV() {
+            const csv = `Análise de Custos do Acidente de Trabalho
+ENG295 - Gabriel Nunes Barbosa Nogueira - 219120116
+
+DADOS DO ACIDENTE
+Cargo,Técnico Eletricista de Manutenção
+Regime,CLT - 44h semanais
+Salário Mensal,R$ 4.200,00
+Data do Acidente,15/04/2025
+Tempo de Afastamento,60 dias
+Data de Retorno,14/06/2025
+
+CUSTOS DIRETOS
+Descrição,Cálculo,Valor (R$)
+Salário (primeiros 15 dias),R$ 140/dia × 15 dias,2100.00
+Encargos Sociais (35%),35% × R$ 2.100,735.00
+Transporte (Ambulância),Custo fixo,850.00
+Internação Hospitalar (5 dias),R$ 2.500/dia × 5 dias,12500.00
+Medicamentos e Curativos,Custo fixo,1200.00
+Fisioterapia (12 sessões),R$ 200 × 12 sessões,2400.00
+SUBTOTAL CUSTOS DIRETOS,,19785.00
+
+CUSTOS INDIRETOS
+Descrição,Cálculo,Valor (R$)
+Contratação Temporária (60 dias),R$ 300/dia × 60 dias,18000.00
+Horas Extras (Equipe),3 técnicos × 40h × R$ 40/h,4800.00
+Treinamento NR-10,15 técnicos × R$ 233.33,3500.00
+Aquisição de Novos EPIs,Custo fixo,2800.00
+Consultoria em Segurança,Custo fixo,1500.00
+Investigação do Acidente,Horas SESMT/CIPA,2200.00
+Procedimentos Administrativos,CAT,500.00
+SUBTOTAL CUSTOS INDIRETOS,,33300.00
+
+RESUMO GERAL
+Categoria,Valor (R$)
+Custos Diretos,19785.00
+Custos Indiretos,33300.00
+CUSTO TOTAL,52585.00
+
+Observação: O custo representa 12,5 vezes o salário mensal do trabalhador.`;
+            
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'planilha_custos_acidente_ENG295.csv';
+            link.click();
+        }
+    </script>
+</body>
+</html>
