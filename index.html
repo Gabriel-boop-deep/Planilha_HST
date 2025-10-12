@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabriel Nunes - AI Specialist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,279 +13,280 @@
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-family: 'Courier New', monospace;
             background: #000;
-            color: #fff;
+            color: #0f0;
             overflow-x: hidden;
-        }
-
-        .container {
-            min-height: 100vh;
             position: relative;
         }
 
-        /* Animated Background */
-        .bg-animation {
+        /* Matrix Rain Effect */
+        .matrix-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
-            background: linear-gradient(45deg, #000, #1a0033, #330066, #000);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            opacity: 0.15;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .grid-overlay {
+        /* Animated Circuit Background */
+        .circuit-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(138, 43, 226, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(138, 43, 226, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
             z-index: 1;
-            animation: gridMove 20s linear infinite;
         }
 
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* Floating Orbs */
-        .orb {
+        /* Tech Grid */
+        .tech-grid {
             position: fixed;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.3;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
             z-index: 1;
-            animation: float 20s infinite ease-in-out;
+            animation: gridScroll 20s linear infinite;
         }
 
-        .orb1 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #8a2be2, transparent);
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
+        @keyframes gridScroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
         }
 
-        .orb2 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #ff1493, transparent);
-            top: 60%;
-            right: 10%;
-            animation-delay: 7s;
+        /* Floating Tech Icons */
+        .floating-icons {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
         }
 
-        .orb3 {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, #00ffff, transparent);
-            bottom: 10%;
-            left: 50%;
-            animation-delay: 14s;
+        .tech-icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.15;
+            animation: floatIcon 15s infinite ease-in-out;
         }
 
-        @keyframes float {
+        @keyframes floatIcon {
             0%, 100% {
-                transform: translate(0, 0) scale(1);
+                transform: translateY(0) rotate(0deg);
             }
-            33% {
-                transform: translate(100px, -100px) scale(1.1);
-            }
-            66% {
-                transform: translate(-100px, 100px) scale(0.9);
+            50% {
+                transform: translateY(-50px) rotate(180deg);
             }
         }
 
-        /* Content */
-        .content {
+        .tech-icon:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; color: #0f0; }
+        .tech-icon:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; color: #0ff; }
+        .tech-icon:nth-child(3) { top: 40%; left: 15%; animation-delay: 4s; color: #f0f; }
+        .tech-icon:nth-child(4) { top: 60%; right: 5%; animation-delay: 6s; color: #0f0; }
+        .tech-icon:nth-child(5) { bottom: 20%; left: 10%; animation-delay: 8s; color: #0ff; }
+        .tech-icon:nth-child(6) { bottom: 10%; right: 15%; animation-delay: 10s; color: #f0f; }
+        .tech-icon:nth-child(7) { top: 30%; left: 50%; animation-delay: 3s; color: #0f0; }
+        .tech-icon:nth-child(8) { top: 70%; right: 30%; animation-delay: 7s; color: #0ff; }
+
+        /* Scan Lines */
+        .scanline {
+            position: fixed;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #0f0, transparent);
+            z-index: 3;
+            animation: scan 8s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes scan {
+            0% { top: -2px; }
+            100% { top: 100%; }
+        }
+
+        /* Container */
+        .container {
             position: relative;
             z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             min-height: 100vh;
             padding: 2rem;
         }
 
-        /* Profile Image */
-        .profile-container {
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 2px solid #0f0;
+            margin-bottom: 3rem;
+            animation: glitchText 2s infinite;
+        }
+
+        @keyframes glitchText {
+            0%, 90%, 100% {
+                text-shadow: 0 0 10px #0f0;
+            }
+            92% {
+                text-shadow: 2px 0 10px #0f0, -2px 0 10px #f0f;
+            }
+            94% {
+                text-shadow: -2px 0 10px #0f0, 2px 0 10px #0ff;
+            }
+        }
+
+        .terminal-prompt {
+            color: #0f0;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile-wrapper {
+            position: relative;
             margin-bottom: 2rem;
         }
 
         .profile-image {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid rgba(138, 43, 226, 0.5);
-            box-shadow: 0 0 40px rgba(138, 43, 226, 0.6),
-                        0 0 80px rgba(255, 20, 147, 0.4);
-            animation: profilePulse 3s ease-in-out infinite;
+            border: 3px solid #0f0;
+            box-shadow: 0 0 30px #0f0, 0 0 60px #0ff, inset 0 0 20px rgba(0, 255, 0, 0.2);
+            animation: profileScan 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes profilePulse {
+        @keyframes profileScan {
             0%, 100% {
-                box-shadow: 0 0 40px rgba(138, 43, 226, 0.6),
-                            0 0 80px rgba(255, 20, 147, 0.4);
-                transform: scale(1);
+                box-shadow: 0 0 30px #0f0, 0 0 60px #0ff, inset 0 0 20px rgba(0, 255, 0, 0.2);
             }
             50% {
-                box-shadow: 0 0 60px rgba(138, 43, 226, 0.8),
-                            0 0 100px rgba(255, 20, 147, 0.6);
-                transform: scale(1.05);
+                box-shadow: 0 0 50px #0f0, 0 0 100px #0ff, inset 0 0 30px rgba(0, 255, 0, 0.4);
             }
         }
 
-        .hero-text {
-            text-align: center;
-            max-width: 900px;
+        .profile-corners {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            z-index: 1;
         }
 
-        .glitch {
-            font-size: 1.2rem;
-            color: #8a2be2;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 1rem;
-            font-weight: 600;
+        .corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #0ff;
         }
+
+        .corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .corner.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+        .corner.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+        .corner.br { bottom: 0; right: 0; border-left: none; border-top: none; }
 
         h1 {
-            font-size: clamp(3rem, 10vw, 7rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, #fff, #8a2be2, #ff1493, #fff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textShine 3s linear infinite;
-            line-height: 1.1;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #0f0;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            letter-spacing: 3px;
         }
 
-        @keyframes textShine {
-            to {
-                background-position: 200% center;
-            }
+        .glitch-text {
+            position: relative;
+            display: inline-block;
         }
 
-        .title-subtitle {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: #00ffff;
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #0ff;
+            text-shadow: 0 0 10px #0ff;
             margin-bottom: 2rem;
-            font-weight: 300;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            letter-spacing: 2px;
         }
 
-        .bio {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.8);
+        .bio-box {
+            max-width: 800px;
             margin: 0 auto 3rem;
-            max-width: 700px;
-            text-align: center;
-        }
-
-        /* Cards Section */
-        .cards-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .card {
-            background: rgba(138, 43, 226, 0.1);
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            border-radius: 20px;
             padding: 2rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #0f0;
+            border-radius: 10px;
             position: relative;
             overflow: hidden;
         }
 
-        .card::before {
+        .bio-box::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(138, 43, 226, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+            animation: scanHorizontal 3s infinite;
         }
 
-        .card:hover::before {
-            top: -100%;
-            left: 100%;
+        @keyframes scanHorizontal {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(138, 43, 226, 0.6);
-            box-shadow: 0 20px 60px rgba(138, 43, 226, 0.3);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #8a2be2;
-        }
-
-        .card p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
+        .bio-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #0f0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         /* Social Links */
-        .social-container {
+        .social-section {
             display: flex;
             gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
             justify-content: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
         }
 
         .social-link {
-            position: relative;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1.2rem 2.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(138, 43, 226, 0.5);
-            border-radius: 50px;
-            color: #fff;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #0f0;
+            color: #0f0;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: bold;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
         }
 
         .social-link::before {
@@ -294,7 +296,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.5), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.3), transparent);
             transition: left 0.5s;
         }
 
@@ -303,162 +305,299 @@
         }
 
         .social-link:hover {
-            transform: scale(1.05);
-            border-color: #8a2be2;
-            box-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
+            border-color: #0ff;
+            color: #0ff;
+            box-shadow: 0 0 20px #0f0, inset 0 0 20px rgba(0, 255, 0, 0.2);
+            transform: translateY(-5px);
         }
 
-        .social-icon {
-            width: 28px;
-            height: 28px;
-            fill: currentColor;
+        .social-link i {
+            font-size: 1.5rem;
         }
 
-        /* Tech Stack Section */
-        .tech-stack {
-            margin-top: 4rem;
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .tech-card {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #0f0;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 0, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .tech-card:hover::before {
+            top: -100%;
+            left: 100%;
+        }
+
+        .tech-card:hover {
+            border-color: #0ff;
+            box-shadow: 0 0 30px #0f0, inset 0 0 20px rgba(0, 255, 0, 0.1);
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #0ff;
+            text-shadow: 0 0 20px #0ff;
+        }
+
+        .tech-card h3 {
+            font-size: 1.5rem;
+            color: #0f0;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        .tech-card p {
+            color: #0f0;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Tech Stack */
+        .tech-stack-section {
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
         }
 
-        .tech-title {
+        .tech-stack-title {
             font-size: 2rem;
+            color: #0f0;
             margin-bottom: 2rem;
-            color: #8a2be2;
+            text-shadow: 0 0 10px #0f0;
         }
 
-        .tech-items {
+        .tech-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
             justify-content: center;
-            max-width: 800px;
         }
 
-        .tech-item {
+        .tech-tag {
             padding: 0.8rem 1.5rem;
-            background: rgba(138, 43, 226, 0.2);
-            border: 1px solid rgba(138, 43, 226, 0.4);
-            border-radius: 30px;
-            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #0f0;
+            color: #0f0;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
+            clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
         }
 
-        .tech-item:hover {
-            background: rgba(138, 43, 226, 0.4);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+        .tech-tag::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 255, 0, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .tech-tag:hover::before {
+            width: 200%;
+            height: 200%;
+        }
+
+        .tech-tag:hover {
+            border-color: #0ff;
+            color: #0ff;
+            box-shadow: 0 0 20px #0f0;
+            transform: scale(1.1);
         }
 
         @media (max-width: 768px) {
-            .hero-text {
-                padding: 1rem;
+            .cards-grid {
+                grid-template-columns: 1fr;
             }
 
-            .cards-section {
-                grid-template-columns: 1fr;
-                padding: 0 1rem;
+            .social-section {
+                flex-direction: column;
+                align-items: center;
             }
 
             .social-link {
-                width: 100%;
+                width: 80%;
                 justify-content: center;
             }
 
-            .bio {
-                font-size: 1rem;
+            .tech-icon {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-    <div class="grid-overlay"></div>
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
+    <canvas class="matrix-bg" id="matrix"></canvas>
+    <div class="circuit-overlay"></div>
+    <div class="tech-grid"></div>
+    <div class="scanline"></div>
+
+    <!-- Floating Tech Icons -->
+    <div class="floating-icons">
+        <i class="fas fa-microchip tech-icon"></i>
+        <i class="fas fa-robot tech-icon"></i>
+        <i class="fas fa-brain tech-icon"></i>
+        <i class="fas fa-network-wired tech-icon"></i>
+        <i class="fas fa-code tech-icon"></i>
+        <i class="fas fa-database tech-icon"></i>
+        <i class="fas fa-terminal tech-icon"></i>
+        <i class="fas fa-server tech-icon"></i>
+    </div>
 
     <div class="container">
-        <div class="content">
+        <div class="header">
+            <div class="terminal-prompt">root@ai-specialist:~$ ./initialize_portfolio.sh</div>
+            <div class="terminal-prompt">[SYSTEM] Loading AI Specialist Profile...</div>
+        </div>
+
+        <div class="profile-section">
             <!-- 📸 COLOQUE SUA FOTO DE PERFIL AQUI -->
             <!-- Substitua "profile.jpg" pelo nome do seu arquivo de imagem -->
-            <!-- Imagem recomendada: sua foto profissional de terno -->
-            <div class="profile-container">
-                <img src="profile.jpeg" alt="Gabriel Nunes" class="profile-image">
+            <div class="profile-wrapper">
+                <div class="profile-corners">
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
+                </div>
+                <img src="profile.jpg" alt="Gabriel Nunes" class="profile-image">
             </div>
 
-            <div class="hero-text">
-                <div class="glitch">AI Specialist</div>
-                <h1>Gabriel Nunes</h1>
-                <div class="title-subtitle">Transformando Dados em Inteligência</div>
-                <p class="bio">
-                    Desenvolvedor especializado em Inteligência Artificial e Machine Learning, 
-                    criando soluções inovadoras que conectam tecnologia de ponta com aplicações práticas. 
+            <h1 class="glitch-text">GABRIEL NUNES</h1>
+            <div class="subtitle">&lt; AI SPECIALIST | MACHINE LEARNING DEVELOPER /&gt;</div>
+
+            <div class="bio-box">
+                <p class="bio-text">
+                    > Desenvolvedor especializado em Inteligência Artificial e Machine Learning,
+                    criando soluções inovadoras que conectam tecnologia de ponta com aplicações práticas.
                     Apaixonado por resolver problemas complexos através de código inteligente.
                 </p>
-
-                <div class="social-container">
-                    <a href="https://www.linkedin.com/in/gabriel-nunes-barbosa-nogueira/" target="_blank" class="social-link">
-                        <svg class="social-icon" viewBox="0 0 24 24">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                        LinkedIn
-                    </a>
-                    
-                    <a href="https://github.com/Gabriel-boop-deep/" target="_blank" class="social-link">
-                        <svg class="social-icon" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        GitHub
-                    </a>
-                </div>
             </div>
 
-            <div class="cards-section">
-                <!-- 🎨 CARDS COM IMAGENS DE FUNDO (OPCIONAL) -->
-                <!-- Você pode adicionar as imagens de IA como background dos cards -->
-                <!-- Descomente e ajuste os caminhos abaixo se quiser usar -->
+            <div class="social-section">
+                <a href="https://www.linkedin.com/in/gabriel-nunes-barbosa-nogueira/" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LINKEDIN</span>
+                </a>
                 
-                <div class="card">
-                    <!-- Para adicionar imagem de fundo, descomente a linha abaixo: -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background: url('ai-image-1.jpg') center/cover; border-radius: 20px;"></div>
-                    <div class="card-icon">🤖</div>
-                    <h3>Machine Learning</h3>
-                    <p>Desenvolvimento de modelos preditivos e sistemas inteligentes usando algoritmos de aprendizado de máquina.</p>
-                </div>
+                <a href="https://github.com/Gabriel-boop-deep/" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                    <span>GITHUB</span>
+                </a>
+            </div>
+        </div>
 
-                <div class="card">
-                    <!-- Para adicionar imagem de fundo, descomente a linha abaixo: -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background: url('ai-image-2.jpg') center/cover; border-radius: 20px;"></div>
-                    <div class="card-icon">🧠</div>
-                    <h3>Deep Learning</h3>
-                    <p>Redes neurais profundas para visão computacional, processamento de linguagem natural e análise avançada.</p>
-                </div>
-
-                <div class="card">
-                    <!-- Para adicionar imagem de fundo, descomente a linha abaixo: -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background: url('ai-image-3.jpg') center/cover; border-radius: 20px;"></div>
-                    <div class="card-icon">📊</div>
-                    <h3>Data Science</h3>
-                    <p>Análise de dados complexos, visualização e extração de insights para tomada de decisões estratégicas.</p>
-                </div>
+        <div class="cards-grid">
+            <!-- 🎨 CARDS COM IMAGENS DE FUNDO (OPCIONAL) -->
+            <!-- Para adicionar imagem de fundo, adicione style="background: url('ai-image-1.jpg') center/cover;" -->
+            
+            <div class="tech-card">
+                <div class="card-icon"><i class="fas fa-brain"></i></div>
+                <h3>MACHINE LEARNING</h3>
+                <p>Desenvolvimento de modelos preditivos e sistemas inteligentes usando algoritmos de aprendizado de máquina.</p>
             </div>
 
-            <div class="tech-stack">
-                <h2 class="tech-title">Tech Stack</h2>
-                <div class="tech-items">
-                    <span class="tech-item">Python</span>
-                    <span class="tech-item">TensorFlow</span>
-                    <span class="tech-item">PyTorch</span>
-                    <span class="tech-item">Scikit-learn</span>
-                    <span class="tech-item">Pandas</span>
-                    <span class="tech-item">NumPy</span>
-                    <span class="tech-item">OpenCV</span>
-                    <span class="tech-item">SQL</span>
-                    <span class="tech-item">Docker</span>
-                    <span class="tech-item">Git</span>
-                </div>
+            <div class="tech-card">
+                <div class="card-icon"><i class="fas fa-project-diagram"></i></div>
+                <h3>DEEP LEARNING</h3>
+                <p>Redes neurais profundas para visão computacional, processamento de linguagem natural e análise avançada.</p>
+            </div>
+
+            <div class="tech-card">
+                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>DATA SCIENCE</h3>
+                <p>Análise de dados complexos, visualização e extração de insights para tomada de decisões estratégicas.</p>
+            </div>
+        </div>
+
+        <div class="tech-stack-section">
+            <h2 class="tech-stack-title">[ TECH_STACK ]</h2>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">TensorFlow</span>
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">Scikit-learn</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">NumPy</span>
+                <span class="tech-tag">OpenCV</span>
+                <span class="tech-tag">SQL</span>
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">Git</span>
             </div>
         </div>
     </div>
+
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * canvas.height / fontSize;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>
