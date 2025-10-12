@@ -122,6 +122,35 @@
             padding: 2rem;
         }
 
+        /* Profile Image */
+        .profile-container {
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(138, 43, 226, 0.5);
+            box-shadow: 0 0 40px rgba(138, 43, 226, 0.6),
+                        0 0 80px rgba(255, 20, 147, 0.4);
+            animation: profilePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes profilePulse {
+            0%, 100% {
+                box-shadow: 0 0 40px rgba(138, 43, 226, 0.6),
+                            0 0 80px rgba(255, 20, 147, 0.4);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(138, 43, 226, 0.8),
+                            0 0 100px rgba(255, 20, 147, 0.6);
+                transform: scale(1.05);
+            }
+        }
+
         .hero-text {
             text-align: center;
             max-width: 900px;
@@ -350,6 +379,13 @@
 
     <div class="container">
         <div class="content">
+            <!-- 📸 COLOQUE SUA FOTO DE PERFIL AQUI -->
+            <!-- Substitua "profile.jpg" pelo nome do seu arquivo de imagem -->
+            <!-- Imagem recomendada: sua foto profissional de terno -->
+            <div class="profile-container">
+                <img src="profile.jpg" alt="Gabriel Nunes" class="profile-image">
+            </div>
+
             <div class="hero-text">
                 <div class="glitch">AI Specialist</div>
                 <h1>Gabriel Nunes</h1>
@@ -378,19 +414,29 @@
             </div>
 
             <div class="cards-section">
+                <!-- 🎨 CARDS COM IMAGENS DE FUNDO (OPCIONAL) -->
+                <!-- Você pode adicionar as imagens de IA como background dos cards -->
+                <!-- Descomente e ajuste os caminhos abaixo se quiser usar -->
+                
                 <div class="card">
+                    <!-- Para adicionar imagem de fundo, descomente a linha abaixo: -->
+                    <!-- <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background: url('ai-image-1.jpg') center/cover; border-radius: 20px;"></div> -->
                     <div class="card-icon">🤖</div>
                     <h3>Machine Learning</h3>
                     <p>Desenvolvimento de modelos preditivos e sistemas inteligentes usando algoritmos de aprendizado de máquina.</p>
                 </div>
 
                 <div class="card">
+                    <!-- Para adicionar imagem de fundo, descomente a linha abaixo: -->
+                    <!-- <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background: url('ai-image-2.jpg') center/cover; border-radius: 20px;"></div> -->
                     <div class="card-icon">🧠</div>
                     <h3>Deep Learning</h3>
                     <p>Redes neurais profundas para visão computacional, processamento de linguagem natural e análise avançada.</p>
                 </div>
 
                 <div class="card">
+                    <!-- Para adicionar imagem de fundo, descomente a linha abaixo: -->
+                    <!-- <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background: url('ai-image-3.jpg') center/cover; border-radius: 20px;"></div> -->
                     <div class="card-icon">📊</div>
                     <h3>Data Science</h3>
                     <p>Análise de dados complexos, visualização e extração de insights para tomada de decisões estratégicas.</p>
