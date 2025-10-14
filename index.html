@@ -13,106 +13,259 @@
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            background: #000;
-            color: #0f0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0e27;
+            color: #fff;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Matrix Rain Effect */
-        .matrix-bg {
+        /* Animated Neural Network Background */
+        .neural-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.15;
         }
 
-        /* Animated Circuit Background */
-        .circuit-overlay {
+        /* Data Particles */
+        .data-stream {
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
             z-index: 1;
-        }
-
-        /* Tech Grid */
-        .tech-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: 1;
-            animation: gridScroll 20s linear infinite;
-        }
-
-        @keyframes gridScroll {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(30px, 30px); }
-        }
-
-        /* Floating Tech Icons */
-        .floating-icons {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
             pointer-events: none;
         }
 
-        .tech-icon {
+        .data-particle {
             position: absolute;
-            font-size: 2rem;
-            opacity: 0.15;
-            animation: floatIcon 15s infinite ease-in-out;
+            width: 4px;
+            height: 4px;
+            background: #4facfe;
+            border-radius: 50%;
+            opacity: 0;
+            animation: dataFlow 8s infinite;
+            box-shadow: 0 0 10px #4facfe;
         }
 
-        @keyframes floatIcon {
+        @keyframes dataFlow {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(1.5);
+            }
+        }
+
+        /* Gradient Orbs */
+        .gradient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 1;
+            animation: orbFloat 20s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+            top: -10%;
+            left: -10%;
+        }
+
+        .orb2 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #764ba2 0%, transparent 70%);
+            bottom: -15%;
+            right: -15%;
+            animation-delay: 5s;
+        }
+
+        .orb3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #f093fb 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes orbFloat {
             0%, 100% {
-                transform: translateY(0) rotate(0deg);
+                transform: translate(0, 0) scale(1);
             }
-            50% {
-                transform: translateY(-50px) rotate(180deg);
+            33% {
+                transform: translate(100px, -100px) scale(1.1);
+            }
+            66% {
+                transform: translate(-100px, 100px) scale(0.9);
             }
         }
 
-        .tech-icon:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; color: #0f0; }
-        .tech-icon:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; color: #0ff; }
-        .tech-icon:nth-child(3) { top: 40%; left: 15%; animation-delay: 4s; color: #f0f; }
-        .tech-icon:nth-child(4) { top: 60%; right: 5%; animation-delay: 6s; color: #0f0; }
-        .tech-icon:nth-child(5) { bottom: 20%; left: 10%; animation-delay: 8s; color: #0ff; }
-        .tech-icon:nth-child(6) { bottom: 10%; right: 15%; animation-delay: 10s; color: #f0f; }
-        .tech-icon:nth-child(7) { top: 30%; left: 50%; animation-delay: 3s; color: #0f0; }
-        .tech-icon:nth-child(8) { top: 70%; right: 30%; animation-delay: 7s; color: #0ff; }
-
-        /* Scan Lines */
-        .scanline {
+        /* Hexagon Grid */
+        .hex-grid {
             position: fixed;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #0f0, transparent);
-            z-index: 3;
-            animation: scan 8s linear infinite;
-            opacity: 0.3;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(100, 181, 246, 0.5) 50px, rgba(100, 181, 246, 0.5) 51px),
+                repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(100, 181, 246, 0.5) 50px, rgba(100, 181, 246, 0.5) 51px);
         }
 
-        @keyframes scan {
-            0% { top: -2px; }
-            100% { top: 100%; }
+        /* Mouse Followers - Fixed Characters with Moving Eyes */
+        .mouse-followers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .character {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .character-body {
+            font-size: 4rem;
+            filter: drop-shadow(0 0 20px currentColor);
+            animation: characterFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes characterFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .character:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            color: #4facfe;
+        }
+
+        .character:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            color: #667eea;
+            animation-delay: 1s;
+        }
+
+        .character:nth-child(3) {
+            bottom: 25%;
+            left: 8%;
+            color: #f093fb;
+            animation-delay: 2s;
+        }
+
+        .character:nth-child(4) {
+            bottom: 20%;
+            right: 12%;
+            color: #4facfe;
+            animation-delay: 1.5s;
+        }
+
+        .character:nth-child(5) {
+            top: 50%;
+            left: 5%;
+            color: #00f2fe;
+            animation-delay: 0.5s;
+        }
+
+        .character:nth-child(6) {
+            top: 55%;
+            right: 8%;
+            color: #667eea;
+            animation-delay: 2.5s;
+        }
+
+        /* Eyes Container */
+        .eyes-container {
+            display: flex;
+            gap: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .eye {
+            width: 30px;
+            height: 30px;
+            background: #fff;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .pupil {
+            width: 14px;
+            height: 14px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .pupil::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #4facfe;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.1s ease;
+            box-shadow: 0 0 30px #4facfe, 0 0 60px #667eea, inset 0 0 15px rgba(79, 172, 254, 0.3);
+            animation: cursorPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes cursorPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
         }
 
         /* Container */
@@ -123,31 +276,61 @@
             padding: 2rem;
         }
 
-        /* Header Section */
+        /* Header with Glitch Effect */
         .header {
             text-align: center;
-            padding: 3rem 0;
-            border-bottom: 2px solid #0f0;
-            margin-bottom: 3rem;
-            animation: glitchText 2s infinite;
+            padding: 2rem 0 3rem;
+            position: relative;
         }
 
-        @keyframes glitchText {
+        .status-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.5rem;
+            background: rgba(79, 172, 254, 0.1);
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+            animation: statusBlink 3s ease-in-out infinite;
+        }
+
+        @keyframes statusBlink {
             0%, 90%, 100% {
-                text-shadow: 0 0 10px #0f0;
+                opacity: 1;
             }
-            92% {
-                text-shadow: 2px 0 10px #0f0, -2px 0 10px #f0f;
-            }
-            94% {
-                text-shadow: -2px 0 10px #0f0, 2px 0 10px #0ff;
+            95% {
+                opacity: 0.5;
             }
         }
 
-        .terminal-prompt {
-            color: #0f0;
-            font-size: 1rem;
-            margin-bottom: 1rem;
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: dotPulse 1.5s ease-in-out infinite;
+            box-shadow: 0 0 10px #00ff88;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.7;
+            }
         }
 
         /* Profile Section */
@@ -155,240 +338,337 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
-        .profile-wrapper {
+        .profile-container {
             position: relative;
             margin-bottom: 2rem;
         }
 
-        .profile-image {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #0f0;
-            box-shadow: 0 0 30px #0f0, 0 0 60px #0ff, inset 0 0 20px rgba(0, 255, 0, 0.2);
-            animation: profileScan 3s ease-in-out infinite;
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes profileScan {
-            0%, 100% {
-                box-shadow: 0 0 30px #0f0, 0 0 60px #0ff, inset 0 0 20px rgba(0, 255, 0, 0.2);
-            }
-            50% {
-                box-shadow: 0 0 50px #0f0, 0 0 100px #0ff, inset 0 0 30px rgba(0, 255, 0, 0.4);
-            }
-        }
-
-        .profile-corners {
+        .hologram-frame {
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
             z-index: 1;
         }
 
-        .corner {
+        .frame-corner {
             position: absolute;
-            width: 30px;
-            height: 30px;
-            border: 2px solid #0ff;
+            width: 40px;
+            height: 40px;
+            border: 3px solid;
+            border-image: linear-gradient(135deg, #4facfe, #00f2fe) 1;
+            animation: cornerScan 4s ease-in-out infinite;
         }
 
-        .corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
-        .corner.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
-        .corner.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
-        .corner.br { bottom: 0; right: 0; border-left: none; border-top: none; }
+        @keyframes cornerScan {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .frame-corner.tl {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .frame-corner.tr {
+            top: 0;
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .frame-corner.bl {
+            bottom: 0;
+            left: 0;
+            border-right: none;
+            border-top: none;
+        }
+
+        .frame-corner.br {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+
+        .profile-image {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background: linear-gradient(#0a0e27, #0a0e27) padding-box,
+                        linear-gradient(135deg, #4facfe, #00f2fe, #667eea) border-box;
+            box-shadow: 0 0 50px rgba(79, 172, 254, 0.5),
+                        0 0 100px rgba(102, 126, 234, 0.3),
+                        inset 0 0 30px rgba(79, 172, 254, 0.1);
+            position: relative;
+            z-index: 2;
+            animation: profileGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes profileGlow {
+            0%, 100% {
+                box-shadow: 0 0 50px rgba(79, 172, 254, 0.5),
+                            0 0 100px rgba(102, 126, 234, 0.3),
+                            inset 0 0 30px rgba(79, 172, 254, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 70px rgba(79, 172, 254, 0.8),
+                            0 0 140px rgba(102, 126, 234, 0.5),
+                            inset 0 0 40px rgba(79, 172, 254, 0.2);
+            }
+        }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #0f0;
-            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
-            letter-spacing: 3px;
-        }
-
-        .glitch-text {
-            position: relative;
-            display: inline-block;
-        }
-
-        .subtitle {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: #0ff;
-            text-shadow: 0 0 10px #0ff;
-            margin-bottom: 2rem;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #667eea 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            animation: titleShimmer 3s ease-in-out infinite;
         }
 
-        .bio-box {
-            max-width: 800px;
+        @keyframes titleShimmer {
+            0%, 100% {
+                filter: brightness(1);
+            }
+            50% {
+                filter: brightness(1.3);
+            }
+        }
+
+        .title-line {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #4facfe;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .title-line::before,
+        .title-line::after {
+            content: '//';
+            color: #667eea;
+            margin: 0 1rem;
+        }
+
+        /* Glass Card Bio */
+        .bio-card {
+            max-width: 900px;
             margin: 0 auto 3rem;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #0f0;
-            border-radius: 10px;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                        inset 0 0 20px rgba(79, 172, 254, 0.05);
             position: relative;
             overflow: hidden;
         }
 
-        .bio-box::before {
+        .bio-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
-            animation: scanHorizontal 3s infinite;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4facfe, transparent);
+            animation: scanLine 4s linear infinite;
         }
 
-        @keyframes scanHorizontal {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        @keyframes scanLine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
         }
 
         .bio-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #0f0;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.9);
             text-align: center;
             position: relative;
             z-index: 1;
         }
 
-        /* Social Links */
+        /* Social Links - Futuristic */
         .social-section {
             display: flex;
             gap: 2rem;
             justify-content: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
             flex-wrap: wrap;
         }
 
         .social-link {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 2rem;
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #0f0;
-            color: #0f0;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            border-radius: 50px;
+            color: #fff;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.1rem;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.4s ease;
         }
 
         .social-link::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.3), transparent);
-            transition: left 0.5s;
+            inset: 0;
+            border-radius: 50px;
+            padding: 2px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe, #667eea);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
         }
 
-        .social-link:hover::before {
-            left: 100%;
+        .social-link::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(79, 172, 254, 0.3), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .social-link:hover::after {
+            width: 300px;
+            height: 300px;
         }
 
         .social-link:hover {
-            border-color: #0ff;
-            color: #0ff;
-            box-shadow: 0 0 20px #0f0, inset 0 0 20px rgba(0, 255, 0, 0.2);
             transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(79, 172, 254, 0.4);
         }
 
         .social-link i {
             font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Cards Grid */
+        .social-link span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tech Cards - Glassmorphism */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto 4rem;
+            max-width: 1300px;
+            margin: 0 auto 5rem;
         }
 
         .tech-card {
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #0f0;
-            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+            transition: all 0.4s ease;
         }
 
         .tech-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 0, 0.05), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(102, 126, 234, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s;
         }
 
         .tech-card:hover::before {
-            top: -100%;
-            left: 100%;
+            opacity: 1;
         }
 
         .tech-card:hover {
-            border-color: #0ff;
-            box-shadow: 0 0 30px #0f0, inset 0 0 20px rgba(0, 255, 0, 0.1);
-            transform: translateY(-10px);
+            transform: translateY(-15px);
+            border-color: rgba(79, 172, 254, 0.5);
+            box-shadow: 0 20px 60px rgba(79, 172, 254, 0.3),
+                        inset 0 0 30px rgba(79, 172, 254, 0.05);
         }
 
         .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #0ff;
-            text-shadow: 0 0 20px #0ff;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #4facfe;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 20px #4facfe);
         }
 
         .tech-card h3 {
-            font-size: 1.5rem;
-            color: #0f0;
+            font-size: 1.6rem;
+            color: #fff;
             margin-bottom: 1rem;
-            text-shadow: 0 0 10px #0f0;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
         }
 
         .tech-card p {
-            color: #0f0;
-            line-height: 1.6;
-            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Tech Stack */
+        /* Tech Stack Pills */
         .tech-stack-section {
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
         }
 
-        .tech-stack-title {
-            font-size: 2rem;
-            color: #0f0;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 10px #0f0;
+        .tech-title {
+            font-size: 2.5rem;
+            color: #4facfe;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
         .tech-tags {
@@ -399,15 +679,17 @@
         }
 
         .tech-tag {
-            padding: 0.8rem 1.5rem;
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #0f0;
-            color: #0f0;
-            font-weight: bold;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            border-radius: 30px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-            clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
         }
 
         .tech-tag::before {
@@ -417,22 +699,21 @@
             left: 50%;
             width: 0;
             height: 0;
-            background: rgba(0, 255, 0, 0.2);
-            border-radius: 50%;
+            background: radial-gradient(circle, rgba(79, 172, 254, 0.3), transparent);
             transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
+            transition: width 0.4s, height 0.4s;
+            border-radius: 50%;
         }
 
         .tech-tag:hover::before {
-            width: 200%;
-            height: 200%;
+            width: 200px;
+            height: 200px;
         }
 
         .tech-tag:hover {
-            border-color: #0ff;
-            color: #0ff;
-            box-shadow: 0 0 20px #0f0;
-            transform: scale(1.1);
+            border-color: #4facfe;
+            box-shadow: 0 0 30px rgba(79, 172, 254, 0.5);
+            transform: translateY(-5px) scale(1.05);
         }
 
         @media (max-width: 768px) {
@@ -446,98 +727,155 @@
             }
 
             .social-link {
-                width: 80%;
+                width: 90%;
                 justify-content: center;
             }
 
-            .tech-icon {
-                font-size: 1.5rem;
+            .status-bar {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
-    <canvas class="matrix-bg" id="matrix"></canvas>
-    <div class="circuit-overlay"></div>
-    <div class="tech-grid"></div>
-    <div class="scanline"></div>
+    <canvas class="neural-bg" id="neuralNetwork"></canvas>
+    
+    <div class="gradient-orb orb1"></div>
+    <div class="gradient-orb orb2"></div>
+    <div class="gradient-orb orb3"></div>
+    
+    <div class="hex-grid"></div>
+    
+    <div class="data-stream" id="dataStream"></div>
 
-    <!-- Floating Tech Icons -->
-    <div class="floating-icons">
-        <i class="fas fa-microchip tech-icon"></i>
-        <i class="fas fa-robot tech-icon"></i>
-        <i class="fas fa-brain tech-icon"></i>
-        <i class="fas fa-network-wired tech-icon"></i>
-        <i class="fas fa-code tech-icon"></i>
-        <i class="fas fa-database tech-icon"></i>
-        <i class="fas fa-terminal tech-icon"></i>
-        <i class="fas fa-server tech-icon"></i>
+    <!-- Fixed Characters with Following Eyes -->
+    <div class="mouse-followers">
+        <div class="character">
+            <div class="character-body">🤖</div>
+            <div class="eyes-container">
+                <div class="eye"><div class="pupil" data-eye="1-left"></div></div>
+                <div class="eye"><div class="pupil" data-eye="1-right"></div></div>
+            </div>
+        </div>
+        
+        <div class="character">
+            <div class="character-body">🧠</div>
+            <div class="eyes-container">
+                <div class="eye"><div class="pupil" data-eye="2-left"></div></div>
+                <div class="eye"><div class="pupil" data-eye="2-right"></div></div>
+            </div>
+        </div>
+        
+        <div class="character">
+            <div class="character-body">💎</div>
+            <div class="eyes-container">
+                <div class="eye"><div class="pupil" data-eye="3-left"></div></div>
+                <div class="eye"><div class="pupil" data-eye="3-right"></div></div>
+            </div>
+        </div>
+        
+        <div class="character">
+            <div class="character-body">⚡</div>
+            <div class="eyes-container">
+                <div class="eye"><div class="pupil" data-eye="4-left"></div></div>
+                <div class="eye"><div class="pupil" data-eye="4-right"></div></div>
+            </div>
+        </div>
+        
+        <div class="character">
+            <div class="character-body">🎯</div>
+            <div class="eyes-container">
+                <div class="eye"><div class="pupil" data-eye="5-left"></div></div>
+                <div class="eye"><div class="pupil" data-eye="5-right"></div></div>
+            </div>
+        </div>
+        
+        <div class="character">
+            <div class="character-body">✨</div>
+            <div class="eyes-container">
+                <div class="eye"><div class="pupil" data-eye="6-left"></div></div>
+                <div class="eye"><div class="pupil" data-eye="6-right"></div></div>
+            </div>
+        </div>
     </div>
+    <div class="cursor-glow" id="cursorGlow"></div>
 
     <div class="container">
         <div class="header">
-            <div class="terminal-prompt">root@ai-specialist:~$ ./initialize_portfolio.sh</div>
-            <div class="terminal-prompt">[SYSTEM] Loading AI Specialist Profile...</div>
+            <div class="status-bar">
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <span>AI SYSTEM ONLINE</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <span>NEURAL NETWORK ACTIVE</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <span>DATA PROCESSING</span>
+                </div>
+            </div>
         </div>
 
         <div class="profile-section">
-            <!-- 📸 SUA FOTO DE PERFIL -->
-            <div class="profile-wrapper">
-                <div class="profile-corners">
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
+            <div class="profile-container">
+                <div class="hologram-frame">
+                    <div class="frame-corner tl"></div>
+                    <div class="frame-corner tr"></div>
+                    <div class="frame-corner bl"></div>
+                    <div class="frame-corner br"></div>
                 </div>
                 <img src="profile.jpeg" alt="Gabriel Nunes" class="profile-image">
             </div>
 
-            <h1 class="glitch-text">GABRIEL NUNES</h1>
-            <div class="subtitle">&lt; AI SPECIALIST | MACHINE LEARNING DEVELOPER /&gt;</div>
+            <h1>Gabriel Nunes</h1>
+            <div class="title-line">AI Specialist & ML Engineer</div>
 
-            <div class="bio-box">
+            <div class="bio-card">
                 <p class="bio-text">
-                    > Desenvolvedor especializado em Inteligência Artificial e Machine Learning,
+                    Desenvolvedor especializado em Inteligência Artificial e Machine Learning,
                     criando soluções inovadoras que conectam tecnologia de ponta com aplicações práticas.
-                    Apaixonado por resolver problemas complexos através de código inteligente.
+                    Apaixonado por resolver problemas complexos através de código inteligente e análise de dados.
                 </p>
             </div>
 
             <div class="social-section">
                 <a href="https://www.linkedin.com/in/gabriel-nunes-barbosa-nogueira/" target="_blank" class="social-link">
                     <i class="fab fa-linkedin"></i>
-                    <span>LINKEDIN</span>
+                    <span>LinkedIn</span>
                 </a>
                 
                 <a href="https://github.com/Gabriel-boop-deep/" target="_blank" class="social-link">
                     <i class="fab fa-github"></i>
-                    <span>GITHUB</span>
+                    <span>GitHub</span>
                 </a>
             </div>
         </div>
 
         <div class="cards-grid">
-            <div class="tech-card" style="background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('ai-image-1.jpg') center/cover;">
+            <div class="tech-card" style="background-image: linear-gradient(rgba(10, 14, 39, 0.9), rgba(10, 14, 39, 0.9)), url('ai-image-1.jpg'); background-size: cover; background-position: center;">
                 <div class="card-icon"><i class="fas fa-brain"></i></div>
-                <h3>MACHINE LEARNING</h3>
-                <p>Desenvolvimento de modelos preditivos e sistemas inteligentes usando algoritmos de aprendizado de máquina.</p>
+                <h3>Machine Learning</h3>
+                <p>Desenvolvimento de modelos preditivos e sistemas inteligentes usando algoritmos de aprendizado de máquina para resolver problemas complexos.</p>
             </div>
 
-            <div class="tech-card" style="background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('ai-image-2.jpg') center/cover;">
+            <div class="tech-card" style="background-image: linear-gradient(rgba(10, 14, 39, 0.9), rgba(10, 14, 39, 0.9)), url('ai-image-2.jpg'); background-size: cover; background-position: center;">
                 <div class="card-icon"><i class="fas fa-project-diagram"></i></div>
-                <h3>DEEP LEARNING</h3>
-                <p>Redes neurais profundas para visão computacional, processamento de linguagem natural e análise avançada.</p>
+                <h3>Deep Learning</h3>
+                <p>Redes neurais profundas para visão computacional, processamento de linguagem natural e análise avançada de padrões.</p>
             </div>
 
-            <div class="tech-card" style="background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('ai-image-3.jpg') center/cover;">
+            <div class="tech-card" style="background-image: linear-gradient(rgba(10, 14, 39, 0.9), rgba(10, 14, 39, 0.9)), url('ai-image-3.jpg'); background-size: cover; background-position: center;">
                 <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                <h3>DATA SCIENCE</h3>
-                <p>Análise de dados complexos, visualização e extração de insights para tomada de decisões estratégicas.</p>
+                <h3>Data Science</h3>
+                <p>Análise de dados complexos, visualização e extração de insights estratégicos para tomada de decisões baseadas em dados.</p>
             </div>
         </div>
 
         <div class="tech-stack-section">
-            <h2 class="tech-stack-title">[ TECH_STACK ]</h2>
+            <h2 class="tech-title">Tech Stack</h2>
             <div class="tech-tags">
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">TensorFlow</span>
@@ -554,46 +892,137 @@
     </div>
 
     <script>
-        // Matrix Rain Effect
-        const canvas = document.getElementById('matrix');
+        // Neural Network Canvas Background
+        const canvas = document.getElementById('neuralNetwork');
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
+        const nodes = [];
+        const nodeCount = 80;
+        const connectionDistance = 150;
 
-        const drops = [];
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.random() * canvas.height / fontSize;
-        }
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+            }
 
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
 
-            ctx.fillStyle = '#0f0';
-            ctx.font = fontSize + 'px monospace';
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
 
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#4facfe';
+                ctx.fill();
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#4facfe';
             }
         }
 
-        setInterval(drawMatrix, 50);
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push(new Node());
+        }
+
+        function drawConnections() {
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        const opacity = (1 - distance / connectionDistance) * 0.3;
+                        ctx.strokeStyle = `rgba(79, 172, 254, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            drawConnections();
+            
+            nodes.forEach(node => {
+                node.update();
+                node.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Data Particles
+        const dataStream = document.getElementById('dataStream');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'data-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            dataStream.appendChild(particle);
+        }
+
+        // Eyes Following Mouse System
+        const pupils = document.querySelectorAll('.pupil');
+        const cursorGlow = document.getElementById('cursorGlow');
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // Cursor glow
+            cursorGlow.style.left = mouseX - 15 + 'px';
+            cursorGlow.style.top = mouseY - 15 + 'px';
+
+            // Update all pupils
+            pupils.forEach(pupil => {
+                const eye = pupil.parentElement;
+                const eyeRect = eye.getBoundingClientRect();
+                const eyeCenterX = eyeRect.left + eyeRect.width / 2;
+                const eyeCenterY = eyeRect.top + eyeRect.height / 2;
+
+                const deltaX = mouseX - eyeCenterX;
+                const deltaY = mouseY - eyeCenterY;
+                const angle = Math.atan2(deltaY, deltaX);
+                const distance = Math.min(8, Math.sqrt(deltaX * deltaX + deltaY * deltaY) / 20);
+
+                const pupilX = Math.cos(angle) * distance;
+                const pupilY = Math.sin(angle) * distance;
+
+                pupil.style.transform = `translate(calc(-50% + ${pupilX}px), calc(-50% + ${pupilY}px))`;
+            });
+        });
+
+        // Hide cursor glow when mouse leaves window
+        document.addEventListener('mouseleave', () => {
+            cursorGlow.style.opacity = '0';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursorGlow.style.opacity = '1';
+        });
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
-    </script>
-</body>
-</html>
